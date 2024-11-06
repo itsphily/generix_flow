@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "flow_ai_generix"
+version = "0.1.0"
+description = "Flow_AI_Generix using crewAI"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = { extras = ["tools"], version = ">=0.76.9,<1.0.0" }
+asyncio = "*"
+
+[tool.poetry.scripts]
+flow_ai_generix = "flow_ai_generix.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
