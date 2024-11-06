@@ -1,57 +1,110 @@
-# FlowAiGenerix Crew
+# Flow AI Generix
 
-Welcome to the FlowAiGenerix Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+A Python package that uses AI to analyze database structures, execute queries, and generate comprehensive insights. The system uses CrewAI to orchestrate a team of specialized AI agents that work together to analyze database trends and generate detailed reports.
+
+## Features
+
+- Automated database structure analysis
+- AI-powered query generation and optimization
+- Trend analysis and reporting
+- Hierarchical AI agent collaboration
+- Markdown report generation
+
+## Prerequisites
+
+- Python 3.8+
+- MySQL database access
+- OpenAI API key
+- Required Python packages (installed automatically via setup.py)
 
 ## Installation
 
-Ensure you have Python >=3.10 <=3.13 installed on your system. This project uses [Poetry](https://python-poetry.org/) for dependency management and package handling, offering a seamless setup and execution experience.
-
-First, if you haven't already, install Poetry:
-
+1. Clone the repository:
 ```bash
-pip install poetry
+git clone https://github.com/yourusername/flow_ai_generix.git
+cd flow_ai_generix
 ```
 
-Next, navigate to your project directory and install the dependencies:
-
-1. First lock the dependencies and then install them:
-
+2. Install the package in development mode:
 ```bash
-crewai install
+pip install -e .
 ```
 
-### Customizing
+## Configuration
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/flow_ai_generix/config/agents.yaml` to define your agents
-- Modify `src/flow_ai_generix/config/tasks.yaml` to define your tasks
-- Modify `src/flow_ai_generix/crew.py` to add your own logic, tools and specific args
-- Modify `src/flow_ai_generix/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
-```bash
-crewai run
+1. Create a `.env` file in the root directory with:
+```env
+OPENAI_API_KEY=your_openai_api_key
+MYSQL_CONNECTION_STRING=mysql+mysqlconnector://user:password@host/database
+MYSQL_DATABASE_NAME=your_database_name
 ```
 
-This command initializes the Flow_AI_Generix Crew, assembling the agents and assigning them tasks as defined in your configuration.
+2. Set up your documentation files in the docs/ directory:
+   - queries.md: Contains database query results
+   - trends.md: Contains trends to analyze
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## Project Structure
 
-## Understanding Your Crew
+```
+flow_ai_generix/
+├── docs/
+│   ├── queries.md
+│   └── trends.md
+├── src/
+│   └── flow_ai_generix/
+│       ├── crews/
+│       │   └── research_crew/
+│       │       ├── config/
+│       │       │   ├── agents.yaml
+│       │       │   └── tasks.yaml
+│       │       └── research_crew.py
+│       ├── pipelines/
+│       │   └── pipeline.py
+│       └── main.py
+├── setup.py
+├── .env
+└── README.md
+```
 
-The Flow_AI_Generix Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+## Usage
 
-## Support
+1. Run the database explorer to generate queries.md:
+```python
+python database_explorer.py
+```
 
-For support, questions, or feedback regarding the FlowAiGenerix Crew or crewAI.
+2. Create your trends.md file in the docs directory.
 
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+3. Run the main analysis:
+```python
+python -m flow_ai_generix.main
+```
 
-Let's create wonders together with the power and simplicity of crewAI.
+## AI Agents
+
+The system uses three specialized AI agents:
+
+1. **Query Writer**: Generates SQL queries based on trends and database structure
+2. **Query Reviewer**: Reviews and optimizes queries for efficiency
+3. **Data Analyst**: Analyzes results and generates comprehensive reports
+
+## Output
+
+The system generates a "Database Analysis.md" file containing:
+- Trend analysis
+- Data interpretations
+- Visualizations
+- Recommendations
+- Limitations and considerations
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
