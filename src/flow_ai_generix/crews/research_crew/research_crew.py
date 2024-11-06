@@ -46,7 +46,7 @@ class ResearchCrew:
         llm = LLM(model="gpt-4o")
         return Agent(
             config=self.agents_config['query_reviewer'],
-            tools=[self.mysql_tool],
+            tools=[MySQLQueryTool()],
             llm=llm,
             verbose=True,
             memory=True

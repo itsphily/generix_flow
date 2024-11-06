@@ -1,31 +1,22 @@
 write_queries:
   name: "Write SQL Queries"
   description: "Use the trends in {trends} and database information in {queries} to write SQL queries that will help us understand the trends or further investigate them."
-  expected_output: |
-    For each query:
-    - the goal of the query
-    - the query to execute
-    - the trend (or trends) that the query is related to.
+  expected_output: the query to execute
 
 review_and_execute_queries:
   name: "Review, Modify if Needed, and Execute Queries"
-  description: |
+  description: >
     For each query provided by the query_writer, perform the following steps individually:
     1. Review the query to assess its potential cost and impact.
     2. Determine if the query is cost-efficient and safe to run.
     3. If approved, execute the query and collect the results.
     4. If not approved, modify the query to make it more efficient while achieving the same goal, then execute it.
     5. Document any modifications made and the reasoning behind them.
-  expected_output: |
-    For each query:
-    - the goal of the query
-    - the trend (or trends) that the query is related to
-    - the query that was executed
-    - The results of the query.
+  expected_output: the query that was executed and the results of the query.
 
 document_results:
   name: "Generate Database Analysis Report"
-  description: |
+  description: >
     Using the data obtained from the query results, the trends to investigate in {trends} and the database information in {queries}, create a concise and informative Markdown-formatted report titled "Database Analysis.md".
 
     **Objectives:**
@@ -44,5 +35,5 @@ document_results:
     - Recommendations for how to investigate the trends further
     - Data limitations and considerations.
     - Any other information that you think is important to include.
-  expected_output: |
+  expected_output: >
     A concise and informative Markdown-formatted report (using the report structure) titled "Database Analysis.md".
