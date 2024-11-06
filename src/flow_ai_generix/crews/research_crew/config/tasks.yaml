@@ -1,39 +1,20 @@
 write_queries:
-  name: "Write SQL Queries"
-  description: "Use the trends in {trends} and database information in {queries} to write SQL queries that will help us understand the trends or further investigate them."
-  expected_output: the query to execute
+  description: Using {trends} and database details in {queries}, write efficient SQL queries to investigate and understand the specified trends.
+  expected_output: >  
+    The SQL queries to be executed.
+  agent: query_writer
 
 review_and_execute_queries:
-  name: "Review, Modify if Needed, and Execute Queries"
   description: >
-    For each query provided by the query_writer, perform the following steps individually:
-    1. Review the query to assess its potential cost and impact.
-    2. Determine if the query is cost-efficient and safe to run.
-    3. If approved, execute the query and collect the results.
-    4. If not approved, modify the query to make it more efficient while achieving the same goal, then execute it.
-    5. Document any modifications made and the reasoning behind them.
-  expected_output: the query that was executed and the results of the query.
+    For each query from the query_writer:
+    - Review for cost and efficiency.
+    - Optimize if necessary.
+    - Execute using MySQLQueryTool.
+  expected_output: > 
+    The executed queries and their results.
+  agent: query_reviewer
 
 document_results:
-  name: "Generate Database Analysis Report"
-  description: >
-    Using the data obtained from the query results, the trends to investigate in {trends} and the database information in {queries}, create a concise and informative Markdown-formatted report titled "Database Analysis.md".
-
-    **Objectives:**
-    - Using the results of the queries and trends in {trends}, provide a high level overview of the data and the trends.
-    - Provide a detailed analysis of the data and the trends.
-    - Provide recommendations for how to investigate the trends further.
-    - Do not make any assumptions, be very specific in your analysis.
-    - Do not make any predictions, this is purely an analysis of the data.
-    - Include visualizations of the data when possible.
-    - Be concise and to the point, avoid filler content.
-
-    **Report Structure:**
-    - The trends that we are investigating
-    - Concise interpretations of the data from the queries related to each trend
-    - Graphs of the data to help visualize the trends
-    - Recommendations for how to investigate the trends further
-    - Data limitations and considerations.
-    - Any other information that you think is important to include.
-  expected_output: >
-    A concise and informative Markdown-formatted report (using the report structure) titled "Database Analysis.md".
+  description: Review the query results, the trends to investigate in {trends}, and create a clear and informative report.
+  expected_output: A Markdown-formatted report suitable for both technical and non-technical audiences.
+  agent: data_analyst

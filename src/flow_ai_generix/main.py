@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-import asyncio
-from flow_ai_generix.pipelines.pipeline import FlowAiGenerixPipeline
+from crews.research_crew.research_crew import ResearchCrew
 import os
 from pathlib import Path
 
@@ -23,7 +22,7 @@ def read_file(file_name):
         print(f"Error reading file: {str(e)}")
         return None
 
-async def run():
+def run():
     """
     Run the pipeline.
     """
@@ -43,19 +42,6 @@ async def run():
         "database_name": database_name
     }
    
-    # Run the pipeline
-    pipeline = FlowAiGenerixPipeline()
-    results = await pipeline.kickoff(inputs)
-    
-    # Process and print results
-    for result in results:
-        print(f"Raw output: {result.raw}")
-        if result.json_dict:
-            print(f"JSON output: {result.json_dict}")
-        print("\n")
+    ResearchCrew().crew().kickoff(inputs)
 
-def main():
-    asyncio.run(run())
-
-if __name__ == "__main__":
-    main()
+run()

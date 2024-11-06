@@ -23,8 +23,8 @@ class ResearchCrew:
     base_path = os.path.dirname(os.path.abspath(__file__))
     
     # Set config paths relative to current file
-    agents_config = os.path.join(base_path, 'config', 'agents.yaml')
-    tasks_config = os.path.join(base_path, 'config', 'tasks.yaml')
+    agents_config = "config/agents.yaml"
+    tasks_config = "config/tasks.yaml"
 
     def __init__(self):
         super().__init__()
@@ -37,8 +37,7 @@ class ResearchCrew:
             config=self.agents_config['query_writer'],
             tools=[],
             llm=llm,
-            verbose=True,
-            memory=True
+            verbose=True
         )
 
     @agent
@@ -48,8 +47,7 @@ class ResearchCrew:
             config=self.agents_config['query_reviewer'],
             tools=[MySQLQueryTool()],
             llm=llm,
-            verbose=True,
-            memory=True
+            verbose=True
         )
     
 
@@ -60,8 +58,7 @@ class ResearchCrew:
             config=self.agents_config['data_analyst'],
             tools=[],
             llm=llm,
-            verbose=True,
-            memory=True
+            verbose=True
         )
 
 
@@ -76,17 +73,14 @@ class ResearchCrew:
     def review_and_execute_queries(self) -> Task:
         return Task(
             config=self.tasks_config['review_and_execute_queries'],
-            agent=self.query_reviewer(),
-            context=[self.write_queries()]
+            agent=self.query_reviewer()
         )
     
     @task
     def document_results(self) -> Task:
         return Task(
             config=self.tasks_config['document_results'],
-            agent=self.data_analyst(),
-            context=[self.review_and_execute_queries(), self.write_queries()],
-            output_file= "Database Analysis.md"
+            output_file= "Database_analysis.md"
         )
 
     @crew
@@ -96,6 +90,5 @@ class ResearchCrew:
             agents=self.agents,  # Automatically created by the @agent decorator
             tasks=self.tasks,    # Automatically created by the @task decorator
             process=Process.sequential,
-            memory=True,
             verbose=True
         )
