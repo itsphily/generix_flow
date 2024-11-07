@@ -7,6 +7,7 @@ import yaml
 import os
 from crewai import LLM
 
+
 # Load environment variables at the start of the file
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))), '.env'))
 
