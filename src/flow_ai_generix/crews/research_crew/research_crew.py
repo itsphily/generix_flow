@@ -19,30 +19,22 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 @CrewBase
 class ResearchCrew:
     """Database Analysis crew"""
-    # Get the current directory path
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    
     # Set config paths relative to current file
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
-    def __init__(self):
-        super().__init__()
-        self.mysql_tool = MySQLQueryTool()
-
     @agent
     def query_writer(self) -> Agent:
-        llm = LLM(model="gpt-4o")
+        llm = LLM(model="o1-preview")
         return Agent(
             config=self.agents_config['query_writer'],
-            tools=[],
             llm=llm,
             verbose=True
         )
 
     @agent
     def query_reviewer(self) -> Agent:
-        llm = LLM(model="gpt-4o")
+        llm = LLM(model="o1-preview")
         return Agent(
             config=self.agents_config['query_reviewer'],
             tools=[MySQLQueryTool()],
@@ -50,13 +42,11 @@ class ResearchCrew:
             verbose=True
         )
     
-
     @agent
     def data_analyst(self) -> Agent:
-        llm = LLM(model="gpt-4o")
+        llm = LLM(model="o1-preview")
         return Agent(
             config=self.agents_config['data_analyst'],
-            tools=[],
             llm=llm,
             verbose=True
         )
@@ -80,7 +70,7 @@ class ResearchCrew:
     def document_results(self) -> Task:
         return Task(
             config=self.tasks_config['document_results'],
-            output_file= "Database_analysis.md"
+            output_file= 'Database_analysis.md'
         )
 
     @crew

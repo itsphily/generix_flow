@@ -1,6 +1,9 @@
 write_queries:
-  description: Using {trends} and database details in {queries}, write efficient SQL queries to investigate and understand the specified trends.
-  expected_output: >  
+  description: >
+    Plan what data you need to gather to analyze pick frequency and item affinity trends. You are trying to highlight specific trends for that business.
+    Then, review the database description and write efficient SQL queries to gather that data. 
+    The database description is provided in {queries}.
+  expected_output: >
     The SQL queries to be executed.
   agent: query_writer
 
@@ -15,6 +18,9 @@ review_and_execute_queries:
   agent: query_reviewer
 
 document_results:
-  description: Review the query results, the trends to investigate in {trends}, and create a clear and informative report.
-  expected_output: A Markdown-formatted report suitable for both technical and non-technical audiences.
+  description: >
+    Use the results of the queries to investigate pick frequency and item affinity trends, and create a clear and informative report with your findings.
+    The report should be as specific as possible to the business and their needs.
+  expected_output: >
+    A Markdown-formatted report suitable for both technical and non-technical audiences.
   agent: data_analyst
